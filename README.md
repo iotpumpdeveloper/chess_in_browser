@@ -1,1 +1,14 @@
-# chess_in_browser
+chess_in_browser
+================
+A weak-AI based chess game in the web browser.
+
+
+## Running the Game
+To run the game, one should first install node.js 7.x
+After that, just do:
+
+```sh
+npm install
+npm run demo
+```
+Now go to 127.0.0.1:8080, you should be able to see the game running.
