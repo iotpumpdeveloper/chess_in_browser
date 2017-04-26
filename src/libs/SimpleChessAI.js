@@ -1,9 +1,4 @@
-var positionCount;
-
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
-
-    positionCount = 0;
-
     var newGameMoves = game.ugly_moves();
     var bestMove = -9999;
     var bestMoveFound;
@@ -22,7 +17,6 @@ var minimaxRoot =function(depth, game, isMaximisingPlayer) {
 };
 
 var minimax = function (depth, game, alpha, beta, isMaximisingPlayer) {
-    positionCount++;
     if (depth === 0) {
         return -evaluateBoard(game.board());
     }
