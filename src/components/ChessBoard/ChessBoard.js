@@ -21,7 +21,7 @@ export default {
 
       var game = new Chess();
 
-      var computerMoveInterval = 500;
+      var computerMoveInterval = 1;
 
       var updateStatus = () => {
         // has the game ended?
@@ -34,7 +34,7 @@ export default {
         } else { //the game should continue 
 
           if (game.in_check()) {
-            computerMoveInterval = 2000;
+            computerMoveInterval = 200;
 
             if (game.turn() === 'b'){ //this means white is being checked 
               this.game_result = 'White is checking Black';
@@ -71,8 +71,8 @@ export default {
         }
       };
 
-      var makeRandomMove = () => {
-        var move = SimpleChessAI.minimaxRoot(2, game, true);
+      var makeAIMove = () => {
+        var move = SimpleChessAI.getNextBestMove(game);
         game.ugly_move(move);
         updateStatus();
         board.position(game.fen());
@@ -90,8 +90,8 @@ export default {
 
         updateStatus();
 
-        // make random legal move for black
-        window.setTimeout(makeRandomMove, computerMoveInterval);
+        // make AI-Based legal move for black
+        window.setTimeout(makeAIMove, computerMoveInterval);
 
       };
 

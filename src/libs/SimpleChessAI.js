@@ -141,9 +141,6 @@ var kingEvalWhite = [
 
 var kingEvalBlack = reverseArray(kingEvalWhite);
 
-
-
-
 var getPieceValue = function (piece, x, y) {
     if (piece === null) {
         return 0;
@@ -168,6 +165,11 @@ var getPieceValue = function (piece, x, y) {
     var absoluteValue = getAbsoluteValue(piece, piece.color === 'w', x ,y);
     return piece.color === 'w' ? absoluteValue : -absoluteValue;
 };
+
+var getNextBestMove = function(game) {
+  return minimaxRoot(3, game, true);
+}
+
 export default {
-  minimaxRoot
+  getNextBestMove
 }
