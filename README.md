@@ -4,7 +4,9 @@ A weak-AI based chess game in the web browser.
 
 
 ## Running the Game
-To run the game, one should first install node.js 7.x
+To run the game, one should first install node.js 7.x.
+[a link](https://nodejs.org/en/)
+
 After that, just do:
 
 ```sh
