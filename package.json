@@ -10,7 +10,6 @@
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
-    "chess.js": "^0.10.2",
     "chessboardjs": "0.0.1",
     "jquery": "^3.2.1",
     "sha1": "^1.1.1",

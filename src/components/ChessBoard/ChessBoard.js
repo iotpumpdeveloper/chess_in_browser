@@ -1,6 +1,7 @@
-import Chess from 'chess.js';
+import Chess from '../../libs/chess.js';
 import ChessBoard from 'chessboardjs';
 import sha1 from 'sha1';
+import SimpleChessAI from '../../libs/SimpleChessAI.js';
 
 export default {
   data () {
@@ -71,9 +72,8 @@ export default {
       };
 
       var makeRandomMove = () => {
-        var possibleMoves = game.moves(); 
-        var randomIndex = Math.floor(Math.random() * possibleMoves.length);
-        game.move(possibleMoves[randomIndex]);
+        var move = SimpleChessAI.minimaxRoot(2, game, true);
+        game.ugly_move(move);
         updateStatus();
         board.position(game.fen());
       };
