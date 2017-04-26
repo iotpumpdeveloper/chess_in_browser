@@ -1,5 +1,6 @@
 import Chess from 'chess.js';
 import ChessBoard from 'chessboardjs';
+import sha1 from 'sha1';
 
 export default {
   data () {
@@ -7,29 +8,13 @@ export default {
       'game_pgn_entries' : [],
       'game_result' : '',
       'game_id' : '',
-      'username' : ''
     }
   },
 
   methods : {
     startNewGame () {
 
-      /**
-       * get username
-       */
-
-      this.$http.post('/gameapi/anonuser/game/create', {
-        'user-agent' : window.navigator.userAgent
-      })
-        .then(response => {
-        // success callback
-        if (response.data.success === true) {
-          this.username = response.data.username;
-          this.game_id = response.data.game_id;
-        }
-      }, response => {
-        // error callback
-      });
+      this.game_id = sha1(Date.now() + window.navigator.userAgent);
 
       this.game_pgn_entries = [];
 
