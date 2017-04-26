@@ -1,3 +1,8 @@
+/**
+ * modified from : 
+ * https://medium.freecodecamp.com/simple-chess-ai-step-by-step-1d55a9266977
+ */
+
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
     var newGameMoves = game.ugly_moves();
     var bestMove = -9999;
