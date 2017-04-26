@@ -97,7 +97,7 @@ export default {
 
       // update the board position after the piece snap
       // for castling, en passant, pawn promotion
-      var onSnapEnd = function() {
+      var onSnapEnd = () => {
         board.position(game.fen());
       };
 
