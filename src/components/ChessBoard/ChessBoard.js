@@ -2,11 +2,11 @@ import Chess from '../../libs/chess.js';
 import ChessBoard from 'chessboardjs';
 import sha1 from 'sha1';
 import SimpleChessAI from '../../libs/SimpleChessAI.js';
+import { EventBus } from '../../libs/EventBus.js';
 
 export default {
   data () {
     return {
-      'game_pgn_entries' : [],
       'game_result' : '',
       'game_id' : '',
     }
@@ -16,8 +16,6 @@ export default {
     startNewGame () {
 
       this.game_id = sha1(Date.now() + window.navigator.userAgent);
-
-      this.game_pgn_entries = [];
 
       var game = new Chess();
 
@@ -50,15 +48,7 @@ export default {
             }
           }
 
-          var _pgnEntries = game.pgn()
-            .trim()
-            .replace(new RegExp(/\s[0-9]+./g),'\n$&')
-            .split('\n')
-            .map(function(entry) {
-              return entry.trim();
-            });
-
-          this.game_pgn_entries = _pgnEntries;
+          EventBus.$emit('game_pgn_update', game.pgn());
         }
       };
 

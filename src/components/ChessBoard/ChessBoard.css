@@ -1,13 +1,3 @@
-div#gamepgn{
-  margin-left: 20px;
-  height: 360px;
-  overflow-y: scroll;
-}
-
-div#gamepgn ul li {
-  list-style-type : none;
-}
-
 div#chessboard {
   margin-top: 20px;
 }
