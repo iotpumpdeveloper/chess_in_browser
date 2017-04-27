@@ -74,6 +74,9 @@ export default {
       var makeAIMove = () => {
         var move = SimpleChessAI.getNextBestMove(game);
         game.ugly_move(move);
+        //play some nice audios
+        var audio = new Audio('/audios/horse.ogg');
+        audio.play();
         updateStatus();
         board.position(game.fen());
       };
@@ -87,6 +90,9 @@ export default {
 
         // illegal move
         if (move === null) return 'snapback';
+
+        var audio = new Audio('/audios/horse.ogg');
+        audio.play();
 
         updateStatus();
 
