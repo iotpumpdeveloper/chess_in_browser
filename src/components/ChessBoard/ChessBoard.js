@@ -1,8 +1,6 @@
 import Chess from '../../libs/chess.js';
 import ChessBoard from 'chessboardjs';
-import sha1 from 'sha1';
 import SimpleChessAI from '../../libs/SimpleChessAI.js';
-import { EventBus } from '../../libs/EventBus.js';
 
 export default {
   data () {
@@ -15,7 +13,7 @@ export default {
   methods : {
     startNewGame () {
 
-      this.game_id = sha1(Date.now() + window.navigator.userAgent);
+      this.game_id = this.$gameservice.createNewGameID();
 
       var game = new Chess();
 
@@ -48,7 +46,7 @@ export default {
             }
           }
 
-          EventBus.$emit('game_pgn_update', game.pgn());
+          this.$eventbus.$emit('game_pgn_update', game.pgn());
         }
       };
 

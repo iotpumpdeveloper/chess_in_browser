@@ -1,5 +1,3 @@
-import { EventBus } from '../../libs/EventBus.js';
-
 export default {
   data () {
     return {
@@ -8,7 +6,7 @@ export default {
   },
 
   mounted () { 
-    EventBus.$on('game_pgn_update', (game_pgn) => {
+    this.$eventbus.$on('game_pgn_update', (game_pgn) => {
       this.game_pgn_entries = game_pgn
         .trim()
         .replace(new RegExp(/\s[0-9]+./g),'\n$&')
