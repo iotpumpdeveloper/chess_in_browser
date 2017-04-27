@@ -21,7 +21,7 @@ export default {
 
       var game = new Chess();
 
-      var computerMoveInterval = 1;
+      var computerMoveInterval = 100;
 
       var updateStatus = () => {
         // has the game ended?
@@ -42,7 +42,7 @@ export default {
               this.game_result = 'Black is checking White';
             }
           } else {
-            computerMoveInterval = 250;
+            computerMoveInterval = 100;
             if (game.turn() === 'b') {
               this.game_result = 'It is Black\'s turn to move';
             } else {
