@@ -1,0 +1,11 @@
+div#chess-controlpanel {
+  width: 100%;
+  margin-top: 20px;
+}
+
+div#chess-controlpanel button.game-control{
+  width: 200px;
+  height: 40px;
+  margin-left: 150px;
+  margin-right: 150px;
+}

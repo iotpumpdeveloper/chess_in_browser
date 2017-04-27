@@ -2,10 +2,6 @@ div#chessboard {
   margin-top: 20px;
 }
 
-button.game-control{
-  height: 40px;
-}
-
 div.gamestatus {
   font-weight: bold;
   font-size: 14px;

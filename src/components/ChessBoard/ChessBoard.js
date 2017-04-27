@@ -10,8 +10,8 @@ export default {
     }
   },
 
-  methods : {
-    startNewGame () {
+  mounted () {
+    this.$eventbus.$on('new_game_started', () => {
 
       this.game_id = this.$gameservice.createNewGameID();
 
@@ -104,11 +104,8 @@ export default {
       };
       var board = ChessBoard('chessboard', cfg);
       this.game_result = 'New game started';
+    });
 
-    }
-  },
-
-  mounted () {
-    this.startNewGame();
+    this.$eventbus.$emit('new_game_started');
   }
 }
