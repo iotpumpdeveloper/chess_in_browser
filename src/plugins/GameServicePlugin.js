@@ -16,7 +16,7 @@ export default class GameServicePlugin
     });
   }
 
-  static createNewGameID() {
+  static createNewGame() {
     var gameId = sha1(Date.now() + window.navigator.userAgent);
     Storage.setItem('current_game_id', gameId);
     return gameId;

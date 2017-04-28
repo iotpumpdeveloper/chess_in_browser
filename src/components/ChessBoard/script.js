@@ -23,7 +23,7 @@ export default {
     });
 
     this.$eventbus.$on('new_game_started', () => {
-      this.game_id = this.$gameservice.createNewGameID();
+      this.game_id = this.$gameservice.createNewGame();
       game = new Chess();
       board.position(game.fen());
       this.$eventbus.$emit('game_pgn_update', game.pgn());
