@@ -58,8 +58,8 @@ export default {
           }
         }
 
-        board.position(game.fen());
         this.$eventbus.$emit('game_pgn_update', game.pgn());
+
       }
     };
 
@@ -80,6 +80,7 @@ export default {
       audio.play();
       updateStatus();
 
+      board.position(game.fen());
     };
 
     var onDrop = (source, target, piece, newPos, oldPos, orientation) => { 
@@ -95,11 +96,10 @@ export default {
       var audio = new Audio('/audios/horse.ogg');
       audio.play();
 
-      updateStatus();
-
       // make AI-Based legal move for black
       window.setTimeout(makeAIMove, computerMoveInterval);
 
+      updateStatus();
     };
 
     // update the board position after the piece snap
