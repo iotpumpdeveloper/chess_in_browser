@@ -1,3 +1,5 @@
+import PGNParser from '../../libs/PGNParser.js';
+
 export default {
   data () {
     return {
@@ -7,23 +9,11 @@ export default {
 
   mounted () { 
     this.$eventbus.$on('game_pgn_update', (game_pgn) => {
-      this.game_pgn_entries = game_pgn
-        .trim()
-        .replace(new RegExp(/\s[0-9]+./g),'\n$&')
-        .split('\n')
-        .map(function(entry) {
-          return entry.trim();
-        });
+      this.game_pgn_entries = PGNParser.parse(game_pgn);
     });
 
     this.$eventbus.$on('load_saved_game', (gameData) => {
-      this.game_pgn_entries = gameData.pgn
-        .trim()
-        .replace(new RegExp(/\s[0-9]+./g),'\n$&')
-        .split('\n')
-        .map(function(entry) {
-          return entry.trim();
-        });
+      this.game_pgn_entries = PGNParser.parse(gameData.pgn);
     });
   }
 
