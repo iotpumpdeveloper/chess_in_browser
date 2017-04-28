@@ -38,6 +38,13 @@ export default class GameServicePlugin
     this.$eventbus.$emit('game_pgn_saved');
   }
 
+  static loadGame(gameId) {
+    Storage.setItem('current_game_id', gameId);
+    var savedGamePGNs = Storage.getItem('saved_game_pgns');
+    var pgn = savedGamePGNs[gameId];
+    this.$eventbus.$emit('load_saved_game', {gameId:gameId, pgn: pgn});
+  }
+
   static getSavedGames() 
   {
     var savedGamePGNs = Storage.getItem('saved_game_pgns');

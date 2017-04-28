@@ -7,8 +7,7 @@ export default {
 
   methods : {
     loadGameIntoBoard(gameId) {
-      var pgn = this.savedGamePGNs[gameId];
-      this.$eventbus.$emit('load_saved_game', {gameId:gameId, pgn: pgn});
+      this.$gameservice.loadGame(gameId);
     }
   },
 
