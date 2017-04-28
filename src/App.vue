@@ -9,7 +9,7 @@
 
 export default {
   components : { //register component locally
-    'chess-portal' : require('./components/ChessPortal/ChessPortal.vue') //one line require local components!!!
+    'chess-portal' : require('./components/ChessPortal/component.vue') //one line require local components!!!
   }
 }
 
