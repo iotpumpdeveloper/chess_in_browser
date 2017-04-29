@@ -31,7 +31,6 @@ export default {
     });
 
     //sound for move
-    var audio = new Audio('/audios/horse.ogg');
     var updateStatus = () => {
       // has the game ended?
       if ( game.moves().length == 0) {
@@ -77,6 +76,7 @@ export default {
       var move = SimpleChessAI.getNextBestMove(game);
       game.ugly_move(move);
       //play some nice audios
+      var audio = new Audio('/audios/horse.ogg');
       audio.play();
       updateStatus();
 
@@ -93,6 +93,7 @@ export default {
       // illegal move
       if (move === null) return 'snapback';
 
+      var audio = new Audio('/audios/horse.ogg');
       audio.play();
 
       // make AI-Based legal move for black
