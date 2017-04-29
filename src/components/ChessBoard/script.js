@@ -24,10 +24,10 @@ export default {
     this.$eventbus.$on('new_game_started', () => {
       this.game_id = this.$gameservice.createNewGame();
       game = new Chess();
-      board.position(game.fen());
       this.$eventbus.$emit('game_pgn_update', game.pgn());
       computerMoveInterval = 400;
       this.game_result = 'Game started';
+      makeAIMove();
     });
 
     //sound for move
@@ -116,6 +116,7 @@ export default {
       onSnapEnd: onSnapEnd
     };
     board = ChessBoard('chessboard', cfg);
+    board.orientation('black');
     this.$eventbus.$emit('new_game_started');
   }
 }
