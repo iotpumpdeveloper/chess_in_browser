@@ -4,10 +4,10 @@
 import sha1 from 'sha1';
 import Storage from '../libs/Storage.js';
 
-export default class GameServicePlugin 
+export default class 
 {
   static install(Vue) {
-    Vue.prototype.$gameservice = GameServicePlugin;
+    Vue.prototype.$gameservice = this;
 
     this.$eventbus = Vue.prototype.$eventbus;
 
