@@ -11,8 +11,7 @@ export default {
   },
 
   mounted () {
-    var game = new Chess();
-    var board;
+    var game, board;
     var computerMoveInterval;
 
     this.$eventbus.$on('load_saved_game', (gameData) => {
@@ -117,7 +116,6 @@ export default {
       onSnapEnd: onSnapEnd
     };
     board = ChessBoard('chessboard', cfg);
-
     this.$eventbus.$emit('new_game_started');
   }
 }
