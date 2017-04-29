@@ -27,7 +27,6 @@ export default {
       this.$eventbus.$emit('game_pgn_update', game.pgn());
       computerMoveInterval = 400;
       this.game_result = 'Game started';
-      makeAIMove();
     });
 
     //sound for move
@@ -117,7 +116,15 @@ export default {
       onSnapEnd: onSnapEnd
     };
     board = ChessBoard('chessboard', cfg);
+    
     board.orientation('black');
+    SimpleChessAI.setAIColor('white');
+
+    if (SimpleChessAI.getAIColor() == 'w') { //this means AI move first
+      // make AI-Based legal move for black
+      window.setTimeout(makeAIMove, computerMoveInterval);
+    }
+
     this.$eventbus.$emit('new_game_started');
   }
 }

@@ -3,10 +3,20 @@
  * https://medium.freecodecamp.com/simple-chess-ai-step-by-step-1d55a9266977
  */
 
-var aiColor = 'black';
+var colorMap = {
+  'black' : 'b',
+  'white' : 'w',
+  'b' : 'b',
+  'w' : 'w'
+}
+var aiColor = 'b'; //default ai is on black
 
 var setAIColor = function(color) {
-  aiColor = color; 
+  aiColor = colorMap[color]; 
+}
+
+var getAIColor = function() {
+  return aiColor;
 }
 
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {
@@ -174,14 +184,16 @@ var getPieceValue = function (piece, x, y) {
     };
 
     var absoluteValue = getAbsoluteValue(piece, piece.color === 'w', x ,y);
-    return piece.color === aiColor ? absoluteValue : -absoluteValue;
+    return piece.color === aiColor ? -absoluteValue : absoluteValue;
 };
 
-var getNextBestMove = function(game, aiColor = 'black') {
+var getNextBestMove = function(game) {
   setAIColor(aiColor);
   return minimaxRoot(3, game, true);
 }
 
 export default {
+  setAIColor,
+  getAIColor, 
   getNextBestMove
 }
