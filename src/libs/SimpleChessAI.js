@@ -16,7 +16,11 @@ var setAIColor = function(color) {
 }
 
 var getAIColor = function() {
-  return aiColor;
+  if (aiColor == 'b') {
+    return 'black';
+  } else if (aiColor == 'w') {
+    return 'white';
+  }
 }
 
 var minimaxRoot =function(depth, game, isMaximisingPlayer) {

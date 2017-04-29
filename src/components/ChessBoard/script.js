@@ -120,7 +120,7 @@ export default {
     board.orientation('black');
     SimpleChessAI.setAIColor('white');
 
-    if (SimpleChessAI.getAIColor() == 'w') { //this means AI move first
+    if (SimpleChessAI.getAIColor() == 'white') { //this means AI move first
       // make AI-Based legal move for black
       window.setTimeout(makeAIMove, computerMoveInterval);
     }
