@@ -94,7 +94,6 @@ export default {
       // illegal move
       if (move === null) return 'snapback';
 
-      var audio = new Audio('/audios/horse.ogg');
       audio.play();
 
       // make AI-Based legal move for black
