@@ -12,7 +12,8 @@ export default {
 
   mounted () {
     var game, board;
-    var computerMoveInterval;
+    var computerMoveInterval = 400;
+    var gameOptions;
 
     this.$eventbus.$on('load_saved_game', (gameData) => {
       this.game_id = gameData.gameId;
@@ -21,12 +22,33 @@ export default {
       board.position(game.fen());
     });
 
-    this.$eventbus.$on('new_game_started', () => {
+    this.$eventbus.$on('new_game_started', (gameOptions) => {
       this.game_id = this.$gameservice.createNewGame();
       game = new Chess();
-      this.$eventbus.$emit('game_pgn_update', game.pgn());
+     
       computerMoveInterval = 400;
+      
+      var cfg = {
+        draggable: true,
+        position: 'start',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onSnapEnd: onSnapEnd
+      };
+      board = ChessBoard('chessboard', cfg);
+
+      board.orientation(gameOptions.player_color);
+
+      if (gameOptions.player_color == 'white') { //player move first
+        SimpleChessAI.setAIColor('black');
+      } else if (gameOptions.player_color == 'black') { //ai move first
+        SimpleChessAI.setAIColor('white');
+        // make AI-Based move 
+        window.setTimeout(makeAIMove, computerMoveInterval);
+      }
+
       this.game_result = 'Game started';
+      this.$eventbus.$emit('game_pgn_update', game.pgn());
     });
 
     //sound for move
@@ -107,24 +129,8 @@ export default {
       board.position(game.fen());
     };
 
-
-    var cfg = {
-      draggable: true,
-      position: 'start',
-      onDragStart: onDragStart,
-      onDrop: onDrop,
-      onSnapEnd: onSnapEnd
-    };
-    board = ChessBoard('chessboard', cfg);
-    
-    board.orientation('black');
-    SimpleChessAI.setAIColor('white');
-
-    if (SimpleChessAI.getAIColor() == 'white') { //this means AI move first
-      // make AI-Based legal move for black
-      window.setTimeout(makeAIMove, computerMoveInterval);
-    }
-
-    this.$eventbus.$emit('new_game_started');
+    this.$eventbus.$emit('new_game_started', {
+      player_color : 'white'
+    });
   }
 }

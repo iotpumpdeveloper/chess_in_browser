@@ -4,7 +4,7 @@ div#chessboard {
 
 div.gamestatus {
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 div.playerbar {
@@ -12,9 +12,9 @@ div.playerbar {
   margin-left : auto;
   margin-right : auto;
   text-align : center;
-  margin-top: 20px;
+  margin-top: 10px;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /*!

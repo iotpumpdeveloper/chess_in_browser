@@ -17,7 +17,7 @@ export default class
   }
 
   static createNewGame() {
-    var gameId = sha1(Date.now() + window.navigator.userAgent);
+    var gameId = sha1(Date.now() + window.navigator.userAgent).substring(0,16);
     Storage.setItem('current_game_id', gameId);
     return gameId;
   }

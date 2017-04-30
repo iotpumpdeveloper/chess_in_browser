@@ -1,4 +1,13 @@
 <div id="chess-controlpanel">
-    <button id="but-newgame" class="game-control" @click="startNewGame">Player another game</button>
-    <button id="but-savegame" class="game-control" @click="saveCurrentGame">SaveGame</button>
+    <div style="clear: both">
+        <button id="but-newgame" class="game-control" @click="startNewGame">Player another game</button>
+        <button id="but-savegame" class="game-control" @click="saveCurrentGame">SaveGame</button>
+    </div>
+    <div style="clear: both;">
+        <label style="float: left; font-size: 12px;font-weight: bold; margin-top: 8px">Select your color</label>
+        <select id="select-playercolor" v-model="player_color" style="float: left; font-size: 12px; margin-left: 10px; margin-top: 5px">
+            <option value = "white">White</option>
+            <option value = "black">Black</option>
+        </select>
+    </div>
 </div>
