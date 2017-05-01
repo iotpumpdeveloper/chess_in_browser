@@ -12,42 +12,55 @@ export default class
     this.$eventbus = Vue.prototype.$eventbus;
 
     this.$eventbus.$on('game_pgn_update', (pgn) => {
-      this.pgn = pgn; 
+      var currentGameData = Storage.getItem('current_game_data');
+      currentGameData.pgn = pgn;
     });
   }
 
-  static createNewGame() {
+  static createNewGame(gameOptions) {
     var gameId = sha1(Date.now() + window.navigator.userAgent).substring(0,16);
-    Storage.setItem('current_game_id', gameId);
+    var gameData = {
+      gameId : gameId,
+      playerColor : gameOptions.player_color,
+      pgn : ''
+    }
+    Storage.setItem('current_game_data', gameData);
     return gameId;
   }
 
   static saveCurrentGame()
   {
-    var currentGameId = Storage.getItem('current_game_id');
-    var savedGamePGNs = Storage.getItem('saved_game_pgns');
+    var currentGameData = Storage.getItem('current_game_data');
+    var currentGameId = currentGameData.gameId;
+    var savedGameData = Storage.getItem('saved_game_data');
 
-    if (savedGamePGNs == null) {
-      savedGamePGNs = {};
+    if (savedGameData == null) {
+      savedGameData = {};
     }
 
-    savedGamePGNs[currentGameId] = this.pgn; 
+    savedGameData[currentGameId] = {
+      gameId : currentGameId,
+      pgn : currentGameData.pgn,
+      playerColor : currentGameData.playerColor
+    };
     
-    Storage.setItem('saved_game_pgns', savedGamePGNs);
-
-    this.$eventbus.$emit('game_pgn_saved');
+    Storage.setItem('saved_game_data', savedGameData);
   }
 
   static loadGame(gameId) {
-    Storage.setItem('current_game_id', gameId);
-    var savedGamePGNs = Storage.getItem('saved_game_pgns');
-    var pgn = savedGamePGNs[gameId];
-    this.$eventbus.$emit('load_saved_game', {gameId:gameId, pgn: pgn});
+    var savedGameData = Storage.getItem('saved_game_data');
+    Storage.setItem('current_game_data', savedGameData[gameId]);
   }
 
   static getSavedGames() 
   {
-    var savedGamePGNs = Storage.getItem('saved_game_pgns');
-    return savedGamePGNs;
+    var savedGameData = Storage.getItem('saved_game_data');
+    return savedGameData;
+  }
+
+  static getGameById(gameId)
+  {
+    var savedGameData = Storage.getItem('saved_game_data');
+    return savedGameData[gameId];
   }
 }

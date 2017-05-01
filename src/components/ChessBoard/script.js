@@ -15,15 +15,17 @@ export default {
     var computerMoveInterval = 400;
     var gameOptions;
 
-    this.$eventbus.$on('load_saved_game', (gameData) => {
-      this.game_id = gameData.gameId;
+    this.$eventbus.$on('load_saved_game', (gameId) => {
+      this.game_id = gameId;
+      var gameData = this.$gameservice.getGameById(gameId);
       game = new Chess();
       game.load_pgn(gameData.pgn);
       board.position(game.fen());
+      board.orientation(gameData.playerColor);
     });
 
     this.$eventbus.$on('new_game_started', (gameOptions) => {
-      this.game_id = this.$gameservice.createNewGame();
+      this.game_id = this.$gameservice.createNewGame(gameOptions);
       game = new Chess();
      
       computerMoveInterval = 400;

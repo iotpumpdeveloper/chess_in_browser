@@ -16,7 +16,9 @@ export default {
     },
 
     saveCurrentGame () {
-      this.$gameservice.saveCurrentGame();      
+      this.$gameservice.saveCurrentGame();
+
+      this.$eventbus.$emit('game_saved');
     }
   }
 }

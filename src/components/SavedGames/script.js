@@ -8,13 +8,14 @@ export default {
   methods : {
     loadGameIntoBoard(gameId) {
       this.$gameservice.loadGame(gameId);
+      this.$eventbus.$emit('load_saved_game', gameId);
     }
   },
 
   mounted () {
-    this.$eventbus.$on('game_pgn_saved', () => {
-      var savedGamePGNs = this.$gameservice.getSavedGames();
-      this.saved_game_list = Object.keys(savedGamePGNs).reverse(); 
+    this.$eventbus.$on('game_saved', () => {
+      var savedGameData = this.$gameservice.getSavedGames();
+      this.saved_game_list = Object.keys(savedGameData).reverse(); 
     });
   }
 }
