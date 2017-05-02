@@ -40,5 +40,9 @@ export default {
     MODAL_CANCEL_EVENT(){
 
     }
+  },
+
+  mounted () {
+    this.startNewGame();
   }
 }
