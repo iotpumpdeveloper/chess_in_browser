@@ -40,21 +40,20 @@ export default {
         onSnapEnd: onSnapEnd
       };
 
-      $(function() {
+      $( () => {
         board = ChessBoard('chessboard', cfg);
         board.orientation(gameOptions.player_color);
+        if (gameOptions.player_color == 'white') { //player move first
+          SimpleChessAI.setAIColor('black');
+        } else if (gameOptions.player_color == 'black') { //ai move first
+          SimpleChessAI.setAIColor('white');
+          // make AI-Based move 
+          window.setTimeout(makeAIMove, computerMoveInterval);
+        }
+        this.game_result = 'Game started';
+        this.$eventbus.$emit('game_pgn_update', game.pgn());
       });
 
-      if (gameOptions.player_color == 'white') { //player move first
-        SimpleChessAI.setAIColor('black');
-      } else if (gameOptions.player_color == 'black') { //ai move first
-        SimpleChessAI.setAIColor('white');
-        // make AI-Based move 
-        window.setTimeout(makeAIMove, computerMoveInterval);
-      }
-
-      this.game_result = 'Game started';
-      this.$eventbus.$emit('game_pgn_update', game.pgn());
     });
 
     //sound for move
