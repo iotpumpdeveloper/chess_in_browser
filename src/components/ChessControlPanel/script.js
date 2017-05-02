@@ -1,7 +1,7 @@
 export default {
 
   components : {
-    'modal' : require('vue2-flexible-modal')    
+    'modal-player-color-chooser' : require('vue2-flexible-modal')    
   },
 
   data () {
@@ -9,7 +9,7 @@ export default {
       modal:{
         title:'Welcome to the chess game',
         visible:false,
-        text:''
+        text:'',
       },
       player_color : 'white', //default player color is white
     }

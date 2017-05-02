@@ -13,3 +13,34 @@ div#chess-controlpanel button.game-control{
   margin-left: 10px;
   font-size: 12px;
 }
+
+.modal-bg {
+  background: lightYellow;
+}
+
+.modal-ct {
+  background: lightYellow;
+}
+
+.modal-ct-body {
+  background: lightYellow;
+}
+
+p.modal-ct-title {
+  background: lightYellow;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.modal-ct-footer {
+  background: lightYellow;
+}
+
+.fright {
+  background: lightYellow;
+}
+
+.modal-ct-head {
+  background: lightYellow;
+  font-size: 10px;
+}

@@ -7,6 +7,7 @@ export default {
     return {
       'game_result' : '',
       'game_id' : '',
+      'is_board_visible' : false
     }
   },
 
@@ -25,6 +26,7 @@ export default {
     });
 
     this.$eventbus.$on('new_game_started', (gameOptions) => {
+      this.is_board_visible = true;
       this.game_id = this.$gameservice.createNewGame(gameOptions);
       game = new Chess();
      
@@ -37,9 +39,11 @@ export default {
         onDrop: onDrop,
         onSnapEnd: onSnapEnd
       };
-      board = ChessBoard('chessboard', cfg);
 
-      board.orientation(gameOptions.player_color);
+      $(function() {
+        board = ChessBoard('chessboard', cfg);
+        board.orientation(gameOptions.player_color);
+      });
 
       if (gameOptions.player_color == 'white') { //player move first
         SimpleChessAI.setAIColor('black');
@@ -130,11 +134,5 @@ export default {
     var onSnapEnd = () => {
       board.position(game.fen());
     };
-
-    /*
-    this.$eventbus.$emit('new_game_started', {
-      player_color : 'white'
-    });
-    */
   }
 }
