@@ -131,8 +131,10 @@ export default {
       board.position(game.fen());
     };
 
+    /*
     this.$eventbus.$emit('new_game_started', {
       player_color : 'white'
     });
+    */
   }
 }

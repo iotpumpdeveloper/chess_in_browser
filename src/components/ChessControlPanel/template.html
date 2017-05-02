@@ -1,8 +1,9 @@
 <div id="chess-controlpanel">
     <div style="clear: both">
-        <button id="but-newgame" class="game-control" @click="startNewGame">Player another game</button>
+        <button id="but-newgame" class="game-control" @click="startNewGame">Player new game</button>
         <button id="but-savegame" class="game-control" @click="saveCurrentGame">SaveGame</button>
     </div>
+    <modal :modalId=0 :title="modal.title" v-model="modal.visible" :bg-click="false" :verify="true" @MODAL_OK_EVENT="MODAL_OK_EVENT" @MODAL_CANCEL_EVENT="MODAL_CANCEL_EVENT">
     <div style="clear: both;">
         <label style="float: left; font-size: 12px;font-weight: bold; margin-top: 8px">Select your color</label>
         <select id="select-playercolor" v-model="player_color" style="float: left; font-size: 12px; margin-left: 10px; margin-top: 5px">
@@ -10,4 +11,5 @@
             <option value = "black">Black</option>
         </select>
     </div>
+    </modal>
 </div>
