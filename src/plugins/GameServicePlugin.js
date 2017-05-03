@@ -4,7 +4,7 @@
 import sha1 from 'sha1';
 import Storage from '../libs/Storage.js';
 import SimpleChessAI from '../libs/SimpleChessAI.js';
-import Chess from '../../libs/chess.js';
+import Chess from '../libs/chess.js';
 
 export default class 
 {
@@ -72,7 +72,38 @@ export default class
     this.game.ugly_move(move);  
     return {
       fen : this.game.fen(),
-      moves : this.game.moves()
+      pgn : this.game.pgn(),
+      moves : this.game.moves(),
+      turn : this.game.turn(),
+      in_check : this.game.in_check(),
     };
+  }
+
+  static doPlayerMove(source, target)
+  {
+    var move = this.game.move({
+      from: source,
+      to: target,
+      promotion: 'q' // NOTE: always promote to a queen for example simplicity
+    });
+
+    return {
+      fen : this.game.fen(),
+      pgn : this.game.pgn(),
+      moves : this.game.moves(),
+      turn : this.game.turn(),
+      in_check : this.game.in_check(),
+      is_valid_move : (move != null)
+    };
+  }
+
+  static setPlayerColor(playerColor)
+  {
+    SimpleChessAI.setAIColor(playerColor);
+  }
+
+  static getPossibleMoves() 
+  {
+    return this.game.moves();
   }
 }
