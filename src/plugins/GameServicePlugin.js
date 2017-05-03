@@ -28,6 +28,7 @@ export default class
     }
     Storage.setItem('current_game_data', gameData);
     this.game = new Chess();
+    SimpleChessAI.setAIColor(gameOptions.player_color == "white"? "black" : "white");
     return gameId;
   }
 
@@ -53,6 +54,7 @@ export default class
   static loadGame(gameId) {
     var savedGameData = Storage.getItem('saved_game_data');
     Storage.setItem('current_game_data', savedGameData[gameId]);
+    SimpleChessAI.setAIColor(savedGameData[gameId].playerColor == "white"? "black" : "white");
     this.game.load_pgn(savedGameData[gameId].pgn);
     var result = savedGameData[gameId];
     result.fen = this.game.fen();
@@ -93,11 +95,6 @@ export default class
       in_check : this.game.in_check(),
       is_valid_move : (move != null)
     };
-  }
-
-  static setPlayerColor(playerColor)
-  {
-    SimpleChessAI.setAIColor(playerColor == "white"? "black" : "white");
   }
 
   static getPossibleMoves() 

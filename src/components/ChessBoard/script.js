@@ -103,7 +103,6 @@ export default {
           onSnapEnd: onSnapEnd
         };
 
-        this.$gameservice.setPlayerColor(gameOptions.player_color);
         board = ChessBoard('chessboard', cfg);
         board.orientation(gameOptions.player_color);
         if (gameOptions.player_color == 'black') { //ai move first
