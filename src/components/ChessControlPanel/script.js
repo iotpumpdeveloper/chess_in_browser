@@ -18,12 +18,6 @@ export default {
   methods : {
     startNewGame () {
       this.modal.visible = !this.modal.visible;
-
-      var gameOptions = {
-        player_color : this.player_color
-      };
-
-      this.$eventbus.$emit('new_game_started', gameOptions);
     },
 
     saveCurrentGame () {
