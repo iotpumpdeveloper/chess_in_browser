@@ -17,8 +17,7 @@ export default {
 
     var gameStatus;
 
-    this.$eventbus.$on('load_saved_game', (gameId) => {
-      var result = this.$gameservice.loadGame(gameId);
+    this.$eventbus.$on('load_saved_game', (result) => {
       board.position(result.fen);
       board.orientation(result.playerColor);
     });
