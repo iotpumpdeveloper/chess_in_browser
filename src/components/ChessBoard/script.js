@@ -54,7 +54,7 @@ export default {
           }
           this.game_result = 'Game started';
           this.$eventbus.$emit('game_pgn_update', game.pgn());
-        }, 100);
+        }, 1);
       });
 
     });
