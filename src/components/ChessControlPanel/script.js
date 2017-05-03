@@ -22,6 +22,8 @@ export default {
       var gameOptions = {
         player_color : this.player_color
       };
+
+      this.$eventbus.$emit('new_game_started', gameOptions);
     },
 
     saveCurrentGame () {

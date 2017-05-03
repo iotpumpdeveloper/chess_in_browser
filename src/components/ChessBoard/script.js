@@ -27,31 +27,34 @@ export default {
 
     this.$eventbus.$on('new_game_started', (gameOptions) => {
       this.is_board_visible = true;
-      this.game_id = this.$gameservice.createNewGame(gameOptions);
-      game = new Chess();
-     
-      computerMoveInterval = 400;
-      
-      var cfg = {
-        draggable: true,
-        position: 'start',
-        onDragStart: onDragStart,
-        onDrop: onDrop,
-        onSnapEnd: onSnapEnd
-      };
 
       $( () => {
-        board = ChessBoard('chessboard', cfg);
-        board.orientation(gameOptions.player_color);
-        if (gameOptions.player_color == 'white') { //player move first
-          SimpleChessAI.setAIColor('black');
-        } else if (gameOptions.player_color == 'black') { //ai move first
-          SimpleChessAI.setAIColor('white');
-          // make AI-Based move 
-          window.setTimeout(makeAIMove, computerMoveInterval);
-        }
-        this.game_result = 'Game started';
-        this.$eventbus.$emit('game_pgn_update', game.pgn());
+        setTimeout( () => {
+          this.game_id = this.$gameservice.createNewGame(gameOptions);
+          game = new Chess();
+
+          computerMoveInterval = 400;
+
+          var cfg = {
+            draggable: true,
+            position: 'start',
+            onDragStart: onDragStart,
+            onDrop: onDrop,
+            onSnapEnd: onSnapEnd
+          };
+
+          board = ChessBoard('chessboard', cfg);
+          board.orientation(gameOptions.player_color);
+          if (gameOptions.player_color == 'white') { //player move first
+            SimpleChessAI.setAIColor('black');
+          } else if (gameOptions.player_color == 'black') { //ai move first
+            SimpleChessAI.setAIColor('white');
+            // make AI-Based move 
+            window.setTimeout(makeAIMove, computerMoveInterval);
+          }
+          this.game_result = 'Game started';
+          this.$eventbus.$emit('game_pgn_update', game.pgn());
+        }, 100);
       });
 
     });
