@@ -100,7 +100,7 @@ export default {
     };
 
     var makeAIMove = () => {
-      var fen = this.$gameservice.doBestMove();
+      var fen = this.$gameservice.doAIMove();
       //play some nice audios
       var audio = new Audio('/audios/horse.ogg');
       audio.play();

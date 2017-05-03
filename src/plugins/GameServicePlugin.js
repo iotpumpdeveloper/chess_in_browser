@@ -67,9 +67,12 @@ export default class
     return savedGameData[gameId];
   }
 
-  static doBestMove() {
+  static doAIMove() {
     var move = SimpleChessAI.getNextBestMove(this.game);
     this.game.ugly_move(move);  
-    return this.game.fen();
+    return {
+      fen : this.game.fen(),
+      moves : this.game.moves()
+    };
   }
 }
