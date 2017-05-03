@@ -53,18 +53,16 @@ export default class
   static loadGame(gameId) {
     var savedGameData = Storage.getItem('saved_game_data');
     Storage.setItem('current_game_data', savedGameData[gameId]);
+    this.game.load_pgn(savedGameData[gameId].pgn);
+    var result = savedGameData[gameId];
+    result.fen = this.game.fen();
+    return result;
   }
 
   static getSavedGames() 
   {
     var savedGameData = Storage.getItem('saved_game_data');
     return savedGameData;
-  }
-
-  static getGameById(gameId)
-  {
-    var savedGameData = Storage.getItem('saved_game_data');
-    return savedGameData[gameId];
   }
 
   static doAIMove() {
@@ -99,7 +97,7 @@ export default class
 
   static setPlayerColor(playerColor)
   {
-   SimpleChessAI.setAIColor(playerColor == "white"? "black" : "white");
+    SimpleChessAI.setAIColor(playerColor == "white"? "black" : "white");
   }
 
   static getPossibleMoves() 

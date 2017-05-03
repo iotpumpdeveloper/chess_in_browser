@@ -7,8 +7,8 @@ export default {
 
   methods : {
     loadGameIntoBoard(gameId) {
-      this.$gameservice.loadGame(gameId);
-      this.$eventbus.$emit('load_saved_game', gameId);
+      var result = this.$gameservice.loadGame(gameId);
+      this.$eventbus.$emit('load_saved_game', result);
     }
   },
 

@@ -11,21 +11,16 @@ export default {
   },
 
   mounted () {
-    var game, board;
+    var board;
     var computerMoveInterval = 400;
     var gameOptions;
 
     var gameStatus;
 
     this.$eventbus.$on('load_saved_game', (gameId) => {
-      /*
-      this.game_id = gameId;
-      var gameData = this.$gameservice.getGameById(gameId);
-      game = new Chess();
-      game.load_pgn(gameData.pgn);
-      board.position(game.fen());
-      board.orientation(gameData.playerColor);
-      */
+      var result = this.$gameservice.loadGame(gameId);
+      board.position(result.fen);
+      board.orientation(result.playerColor);
     });
 
     this.$eventbus.$on('new_game_started', (gameOptions) => {

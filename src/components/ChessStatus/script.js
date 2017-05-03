@@ -12,9 +12,8 @@ export default {
       this.game_pgn_entries = PGNParser.parse(game_pgn);
     });
 
-    this.$eventbus.$on('load_saved_game', (gameId) => {
-      var gameData = this.$gameservice.getGameById(gameId);
-      this.game_pgn_entries = PGNParser.parse(gameData.pgn);
+    this.$eventbus.$on('load_saved_game', (result) => {
+      this.game_pgn_entries = PGNParser.parse(result.pgn);
     });
   }
 
