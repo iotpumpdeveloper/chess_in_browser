@@ -99,7 +99,7 @@ export default class
 
   static setPlayerColor(playerColor)
   {
-    SimpleChessAI.setAIColor(playerColor);
+   SimpleChessAI.setAIColor(playerColor == "white"? "black" : "white");
   }
 
   static getPossibleMoves() 
