@@ -1,6 +1,5 @@
 import Chess from '../../libs/chess.js';
 import ChessBoard from 'chessboardjs';
-import SimpleChessAI from '../../libs/SimpleChessAI.js';
 
 export default {
   data () {
@@ -31,7 +30,6 @@ export default {
       $( () => {
         setTimeout( () => {
           this.game_id = this.$gameservice.createNewGame(gameOptions);
-          game = new Chess();
 
           computerMoveInterval = 400;
 
@@ -102,14 +100,13 @@ export default {
     };
 
     var makeAIMove = () => {
-      var move = SimpleChessAI.getNextBestMove(game);
-      game.ugly_move(move);
+      var fen = this.$gameservice.doBestMove();
       //play some nice audios
       var audio = new Audio('/audios/horse.ogg');
       audio.play();
       updateStatus();
 
-      board.position(game.fen());
+      board.position(fen);
     };
 
     var onDrop = (source, target, piece, newPos, oldPos, orientation) => { 

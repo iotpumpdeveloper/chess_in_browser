@@ -3,6 +3,8 @@
  */
 import sha1 from 'sha1';
 import Storage from '../libs/Storage.js';
+import SimpleChessAI from '../libs/SimpleChessAI.js';
+import Chess from '../../libs/chess.js';
 
 export default class 
 {
@@ -25,6 +27,7 @@ export default class
       pgn : ''
     }
     Storage.setItem('current_game_data', gameData);
+    this.game = new Chess();
     return gameId;
   }
 
@@ -62,5 +65,11 @@ export default class
   {
     var savedGameData = Storage.getItem('saved_game_data');
     return savedGameData[gameId];
+  }
+
+  static doBestMove() {
+    var move = SimpleChessAI.getNextBestMove(this.game);
+    this.game.ugly_move(move);  
+    return this.game.fen();
   }
 }
