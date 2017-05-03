@@ -14,44 +14,7 @@ export default {
     var board;
     var computerMoveInterval = 400;
     var gameOptions;
-
     var gameStatus;
-
-    this.$eventbus.$on('load_saved_game', (result) => {
-      board.position(result.fen);
-      board.orientation(result.playerColor);
-    });
-
-    this.$eventbus.$on('new_game_started', (gameOptions) => {
-      this.is_board_visible = true;
-
-      $( () => {
-        setTimeout( () => {
-          this.game_id = this.$gameservice.createNewGame(gameOptions);
-
-          computerMoveInterval = 400;
-
-          var cfg = {
-            draggable: true,
-            position: 'start',
-            onDragStart: onDragStart,
-            onDrop: onDrop,
-            onSnapEnd: onSnapEnd
-          };
-
-          this.$gameservice.setPlayerColor(gameOptions.player_color);
-          board = ChessBoard('chessboard', cfg);
-          board.orientation(gameOptions.player_color);
-          if (gameOptions.player_color == 'black') { //ai move first
-            // make AI-Based move 
-            window.setTimeout(makeAIMove, computerMoveInterval);
-          }
-          this.game_result = 'Game started';
-          this.$eventbus.$emit('game_pgn_update', ''); //in the beginning, pgn is an empty string
-        }, 1);
-      });
-
-    });
 
     var updateStatus = (result) => {
       // has the game ended?
@@ -125,5 +88,45 @@ export default {
     var onSnapEnd = () => {
       board.position(gameStatus.fen);
     };
+
+    var waitForChessBoard = () => {
+      if ($('#chessboard').length) {
+        this.game_id = this.$gameservice.createNewGame(gameOptions);
+
+        computerMoveInterval = 400;
+
+        var cfg = {
+          draggable: true,
+          position: 'start',
+          onDragStart: onDragStart,
+          onDrop: onDrop,
+          onSnapEnd: onSnapEnd
+        };
+
+        this.$gameservice.setPlayerColor(gameOptions.player_color);
+        board = ChessBoard('chessboard', cfg);
+        board.orientation(gameOptions.player_color);
+        if (gameOptions.player_color == 'black') { //ai move first
+          // make AI-Based move 
+          window.setTimeout(makeAIMove, computerMoveInterval);
+        }
+        this.game_result = 'Game started';
+        this.$eventbus.$emit('game_pgn_update', ''); //in the beginning, pgn is an empty string
+      } else {
+        window.setTimeout(waitForChessBoard, 1);
+      }
+    }
+
+    this.$eventbus.$on('load_saved_game', (result) => {
+      board.position(result.fen);
+      board.orientation(result.playerColor);
+    });
+
+    this.$eventbus.$on('new_game_started', (_gameOptions) => {
+      this.is_board_visible = true; 
+      gameOptions = _gameOptions;
+      waitForChessBoard();
+    });
+
   }
 }
